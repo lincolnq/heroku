@@ -3,13 +3,13 @@ require "heroku/api/domains_v3_domain_cname"
 
 module Heroku::Command
 
-  # manage custom domains
+  # manage domains
   #
   class Domains < Base
 
     # domains
     #
-    # list custom domains for an app
+    # list domains for an app
     #
     #Examples:
     #
