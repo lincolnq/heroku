@@ -27,7 +27,7 @@ module Heroku::Command
           :body => (
           [
             {
-              'kind' => 'default',
+              'kind' => 'heroku',
               'hostname' => 'example.herokuapp.com',
               'cname' => nil
             }
@@ -70,7 +70,7 @@ module Heroku::Command
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Development Domain
+=== Heroku Domain
  !    Not found
 
 === Custom Domains
@@ -84,7 +84,7 @@ STDOUT
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Development Domain
+=== Heroku Domain
 example.herokuapp.com
 
 === Custom Domains
@@ -98,7 +98,7 @@ STDOUT
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Development Domain
+=== Heroku Domain
 example.herokuapp.com
 
 === Custom Domains

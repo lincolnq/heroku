@@ -26,10 +26,10 @@ module Heroku::Command
       validate_arguments!
       domains = api.get_domains_v3_domain_cname(app).body
 
-      styled_header("Development Domain")
-      default_domain = domains.detect { |d| d['kind'] == 'default' }
-      if default_domain
-        display default_domain['hostname']
+      styled_header("Heroku Domain")
+      heroku_domain = domains.detect { |d| d['kind'] == 'heroku' || d['kind'] == 'default' } # TODO: remove 'default' after API change
+      if heroku_domain
+        display heroku_domain['hostname']
       else
         output_with_bang "Not found"
       end
