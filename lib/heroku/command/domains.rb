@@ -14,7 +14,7 @@ module Heroku::Command
     #Examples:
     #
     # $ heroku domains
-    # === Development Domain
+    # === Heroku Domain
     # example.herokuapp.com
     #
     # === Custom Domains
