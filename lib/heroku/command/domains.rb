@@ -14,19 +14,19 @@ module Heroku::Command
     #Examples:
     #
     # $ heroku domains
-    # === Heroku Domain
+    # === example Heroku Domain
     # example.herokuapp.com
     #
-    # === Custom Domains
+    # === example Custom Domains
     # Domain Name  DNS Target
     # -----------  ---------------------
-    # example.com  example.herokudns.com
+    # example.com  example.herokuapp.com
     #
     def index
       validate_arguments!
       domains = api.get_domains_v3_domain_cname(app).body
 
-      styled_header("Heroku Domain")
+      styled_header("#{app} Heroku Domain")
       heroku_domain = domains.detect { |d| d['kind'] == 'heroku' || d['kind'] == 'default' } # TODO: remove 'default' after API change
       if heroku_domain
         display heroku_domain['hostname']
@@ -36,7 +36,7 @@ module Heroku::Command
 
       display
 
-      styled_header("Custom Domains")
+      styled_header("#{app} Custom Domains")
       custom_domains = domains.select{ |d| d['kind'] == 'custom' }
       if custom_domains.length > 0
         display_table(custom_domains, ['hostname', 'cname'], ['Domain Name', 'DNS Target'])
@@ -55,7 +55,7 @@ module Heroku::Command
     # $ heroku domains:add example.com
     # Adding example.com to example... done
     #
-    # !   Configure your application’s DNS to point to example.herokudns.com
+    # !   Configure your application’s DNS to point to example.herokuapp.com
     # !   For help with custom domains, see https://devcenter.heroku.com/articles/custom-domains
     #
     def add

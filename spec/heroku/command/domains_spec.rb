@@ -34,7 +34,7 @@ module Heroku::Command
           ] + custom_hostnames.map { |hostname|
             { 'kind' => 'custom',
               'hostname' => hostname,
-              'cname' => 'example.herokudns.com'
+              'cname' => 'example-2121.herokussl.com'
             }
           }
           ).to_json,
@@ -56,7 +56,7 @@ module Heroku::Command
           :body => {
             'kind' => 'custom',
             'hostname' => custom_hostname,
-            'cname' => 'example.herokudns.com'
+            'cname' => 'example-2121.herokussl.com'
           }.to_json,
         }
       end
@@ -70,10 +70,10 @@ module Heroku::Command
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Heroku Domain
+=== example Heroku Domain
  !    Not found
 
-=== Custom Domains
+=== example Custom Domains
 example has no custom domains.
 Use `heroku domains:add DOMAIN` to add one.
 STDOUT
@@ -84,10 +84,10 @@ STDOUT
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Heroku Domain
+=== example Heroku Domain
 example.herokuapp.com
 
-=== Custom Domains
+=== example Custom Domains
 example has no custom domains.
 Use `heroku domains:add DOMAIN` to add one.
 STDOUT
@@ -98,14 +98,14 @@ STDOUT
         stderr, stdout = execute("domains")
         expect(stderr).to eq("")
         expect(stdout).to eq <<-STDOUT
-=== Heroku Domain
+=== example Heroku Domain
 example.herokuapp.com
 
-=== Custom Domains
+=== example Custom Domains
 Domain Name   DNS Target
-------------  ---------------------
-example1.com  example.herokudns.com
-example2.com  example.herokudns.com
+------------  --------------------------
+example1.com  example-2121.herokussl.com
+example2.com  example-2121.herokussl.com
 STDOUT
       end
 
@@ -117,7 +117,7 @@ STDOUT
       expect(stderr).to eq("")
       expect(stdout).to eq <<-STDOUT
 Adding example.com to example... done
- !    Configure your application's DNS to point to example.herokudns.com
+ !    Configure your application's DNS to point to example-2121.herokussl.com
  !    For help, see https://devcenter.heroku.com/articles/custom-domains
 STDOUT
     end
